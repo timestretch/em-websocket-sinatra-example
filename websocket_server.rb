@@ -19,25 +19,25 @@ EventMachine.run do
 		end
 	end
 
-    EventMachine::WebSocket.start(:host => '0.0.0.0', :port => 8080) do |socket|
-        
-        socket.onopen do |handshake|
+	EventMachine::WebSocket.start(:host => '0.0.0.0', :port => 8080) do |socket|
+		
+		socket.onopen do |handshake|
 			$sockets << socket
-            puts "Client connected: "
-            puts "#{ { :path => handshake.path, 
-            		   :query => handshake.query, 
-            		   :origin => handshake.origin } }"
-        end
+			puts "Client connected: "
+			puts "#{ { :path => handshake.path, 
+					   :query => handshake.query, 
+					   :origin => handshake.origin } }"
+		end
 
-        socket.onclose do
+		socket.onclose do
 			$sockets.delete( socket )
-            puts "Client disconnected."
-        end
+			puts "Client disconnected."
+		end
 
-        socket.onmessage do |msg|
-            puts "Received Message: " + msg
-            socket.send "Pong: " + msg
-        end
+		socket.onmessage do |msg|
+			puts "Received Message: " + msg
+			socket.send "Pong: " + msg
+		end
 		
 		socket.onerror do |error|
 			if error.kind_of?(EM::WebSocket::WebSocketError)
@@ -45,6 +45,6 @@ EventMachine.run do
 			end
 		end
 
-    end
+	end
 end
 

@@ -14,13 +14,13 @@ $(function() {
 	}
 	
 	socket.onopen = function() {
-    	log_msg("Socket has been opened!");
+		log_msg("Socket has been opened!");
 	}
 	socket.onclose = function() {
-    	log_msg("Socket has been closed!");
+		log_msg("Socket has been closed!");
 	}
 	socket.onmessage = function(msg) {
-    	log_msg(msg.data);
+		log_msg(msg.data);
 	}	
 });
 
