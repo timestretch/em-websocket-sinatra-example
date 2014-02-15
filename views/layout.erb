@@ -1,0 +1,34 @@
+<html>
+<head>
+<title>WebSocket Example</title>
+<link rel="stylesheet" href="/css/style.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(function() {
+	var socket = new WebSocket("ws://localhost:8080/");
+	
+	function log_msg(msg)
+	{
+		content = $("#msg").append("<div>" + msg + "</div>");
+	}
+	
+	socket.onopen = function() {
+    	log_msg("Socket has been opened!");
+	}
+	socket.onclose = function() {
+    	log_msg("Socket has been closed!");
+	}
+	socket.onmessage = function(msg) {
+    	log_msg(msg.data);
+	}	
+});
+
+</script>
+</head>
+<body>
+
+<%= yield %>
+
+</body>
+</html>
